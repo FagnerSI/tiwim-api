@@ -1,6 +1,6 @@
 from django.db import models
 
-from user.models import User
+from account.models import Account
 from role.models import Role
 
 
@@ -15,7 +15,7 @@ class Project(models.Model):
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
 
     """ add through='Users_Projects' """
-    users = models.ManyToManyField(User)
+    members = models.ManyToManyField(Account)
 
     roles = models.ManyToManyField(Role)
 
@@ -23,9 +23,9 @@ class Project(models.Model):
         return self.name
 
 
-class Users_Projects(models.Model):
+""" class Users_Projects(models.Model):
     user = models.ForeignKey(
-        User, related_name='projects', on_delete=models.CASCADE)
+        Account, related_name='projects', on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     date_joined = models.DateField(auto_now_add=True)
-    admin = models.BooleanField('É administrador?', default=False)
+    admin = models.BooleanField('É administrador?', default=False) """

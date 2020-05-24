@@ -1,6 +1,6 @@
 from django.db import models
 
-from user.models import User
+from account.models import Account
 from role.models import Role
 from topic.models import Topic
 
@@ -50,12 +50,12 @@ class Replay(models.Model):
 
     roles_for = models.ManyToManyField(Role, verbose_name='Para o papel')
 
-    urlDetails = models.TextField('uri', blank=True)
+    url_details = models.TextField('uri', blank=True)
 
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
 
-    user = models.ForeignKey(User, verbose_name='User',
-                             related_name='replays', on_delete=models.CASCADE)
+    author = models.ForeignKey(Account, verbose_name='User',
+                               related_name='replays', on_delete=models.CASCADE)
     topic = models.ForeignKey(
         Topic, verbose_name='Topic', related_name='replays', on_delete=models.CASCADE)
 
