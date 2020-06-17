@@ -3,8 +3,8 @@ from .models import Topic
 
 
 class TopicSerializer(ModelSerializer):
-    # users = UserSerializerTopic(many=True, read_only=True)
     """  replays = ReplaySerializer(many=True, read_only=True) """
+
     class Meta:
 
         model = Topic

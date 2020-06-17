@@ -37,11 +37,17 @@ class AccountManager(BaseUserManager):
 
 class Account(AbstractBaseUser, PermissionsMixin):
 
+    class Meta:
+        db_table = 'account'
+
     name = models.CharField(_('name'), max_length=100)
     email = models.EmailField(_('email address'), max_length=255, unique=True)
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     is_active = models.BooleanField(_('active'), default=True)
     is_trusty = models.BooleanField(_('trusty'), default=False)
+
+    is_staff = models.BooleanField(_('staff status'), default=False, help_text=_(
+        'Designates whether the user can log into this admin site.'))
 
     objects = AccountManager()
 

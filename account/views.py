@@ -24,6 +24,13 @@ class AccountView(viewsets.ModelViewSet):
 
         return super(self.__class__, self).get_permissions()
 
+    def list(self, request, *args, **kwargs):
+        account = self.request.user
+        queryset = Account.objects.exclude(id=account.id)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
     @action(detail=False, methods=['post'], permission_classes=[AllowAny])
     def login(self, request):
         serializer = LoginSerializer(data=request.data,
@@ -38,22 +45,3 @@ class AccountView(viewsets.ModelViewSet):
             'name': user.name,
             'email': user.email
         })
-
-
-""" class Login(ObtainAuthToken):
-    permission_classes = [AllowAny]
-
-    def post(self, request, *args, **kwargs):
-        serializer = LoginSerializer(data=request.data,
-                                     context={'request': request})
-        serializer.is_valid(raise_exception=True)
-        user = serializer.validated_data['user']
-        token, created = Token.objects.get_or_create(user=user)
-
-        return Response({
-            'token': token.key,
-            'user_id': user.pk,
-            'name': user.name,
-            'email': user.email
-        })
- """

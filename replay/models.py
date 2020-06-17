@@ -48,7 +48,8 @@ class Replay(models.Model):
     roles_in = models.ForeignKey(
         Role, verbose_name='No papel', related_name='replays_in',  on_delete=models.CASCADE)
 
-    roles_for = models.ManyToManyField(Role, verbose_name='Para o papel')
+    roles_for = models.ManyToManyField(
+        Role, verbose_name='Para o papel', related_name='replays_for')
 
     url_details = models.TextField('uri', blank=True)
 
