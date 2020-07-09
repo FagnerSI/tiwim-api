@@ -5,6 +5,13 @@ from .models import Account
 
 
 class AccountSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(
+        label=_('Password'),
+        style={'input_type': 'password'},
+        write_only=True,
+        required=True,
+    )
+
     confirmPassword = serializers.CharField(
         label=_('Confirm Password'),
         style={'input_type': 'password'},
@@ -39,6 +46,17 @@ class AccountSerializer(serializers.ModelSerializer):
         account.save()
 
         return account
+
+
+""" class AccountListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Account
+        fields = [
+            'id',
+            'name',
+            'email',
+        ]
+ """
 
 
 class LoginSerializer(serializers.Serializer):

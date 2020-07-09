@@ -8,7 +8,6 @@ from topic.serializers import TopicSerializer
 
 
 class ProjectSerializer(ModelSerializer):
-    topics = TopicSerializer(many=True, read_only=True)
     roles = SerializerMethodField()
 
     class Meta:
@@ -37,3 +36,18 @@ class ProjectSerializer(ModelSerializer):
             project.roles.create(name=role)
 
         return project
+
+
+class ProjectListSerializer(ModelSerializer):
+    members = AccountSerializer(many=True, read_only=True)
+    roles = SerializerMethodField()
+
+    class Meta:
+
+        model = Project
+        fields = '__all__'
+
+    def get_roles(self, obj):
+        roles = obj.roles.all()
+        response = RoleSerializer(roles, many=True).data
+        return response
