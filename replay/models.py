@@ -4,34 +4,34 @@ from account.models import Account
 from role.models import Role
 from topic.models import Topic
 
-KIND_OF_SPEECH_CHOICES = [
-    ('PE', 'Pergunto'),
-    ('SU', 'Sugiro'),
-    ('AD', 'Além disso'),
-    ('CM', 'Comento'),
-    ('ACT', 'Acrescento'),
-    ('INF', 'Informo'),
-    ('RP', 'Respondo'),
-    ('CD', 'Concordo'),
-    ('DIS', 'Discordo'),
-    ('PRQ', 'Para que'),
-    ('PQ', 'Porque'),
-    ('PC', 'Peço'),
-    ('EX', 'Explico'),
-    ('EXF', 'Exemplifico'),
-    ('NE', 'Não entendi'),
-    ('E', 'E'),
-    ('ET', 'Então'),
-    ('OU', 'Ou'),
-    ('MAS', 'Mas'),
-    ('CNM', 'Concordo mas'),
-    ('DSM', 'Discordo mas'),
-    ('CON', 'Continuo'),
-    ('TRN', 'Transcrevo'),
-]
-
 
 class Replay(models.Model):
+
+    KIND_OF_SPEECH_CHOICES = (
+        ('PE', 'Pergunto'),
+        ('SU', 'Sugiro'),
+        ('AD', 'Além disso'),
+        ('CM', 'Comento'),
+        ('ACT', 'Acrescento'),
+        ('INF', 'Informo'),
+        ('RP', 'Respondo'),
+        ('CD', 'Concordo'),
+        ('DIS', 'Discordo'),
+        ('PRQ', 'Para que'),
+        ('PQ', 'Porque'),
+        ('PC', 'Peço'),
+        ('EX', 'Explico'),
+        ('EXF', 'Exemplifico'),
+        ('NE', 'Não entendi'),
+        ('E', 'E'),
+        ('ET', 'Então'),
+        ('OU', 'Ou'),
+        ('MAS', 'Mas'),
+        ('CNM', 'Concordo mas'),
+        ('DSM', 'Discordo mas'),
+        ('CON', 'Continuo'),
+        ('TRN', 'Transcrevo'),
+    )
 
     class Meta:
         db_table = 'replay'
@@ -40,7 +40,7 @@ class Replay(models.Model):
 
     kind_speech = models.CharField(
         'Tipo de fala',
-        max_length=2,
+        max_length=10,
         choices=KIND_OF_SPEECH_CHOICES,
         default='E',
     )

@@ -1,9 +1,9 @@
 from rest_framework.serializers import ModelSerializer
 from .models import Topic
+from replay.serializers import ReplaySerializer
 
 
 class TopicSerializer(ModelSerializer):
-    """  replays = ReplaySerializer(many=True, read_only=True) """
 
     class Meta:
 

@@ -40,14 +40,9 @@ class ProjectSerializer(ModelSerializer):
 
 class ProjectListSerializer(ModelSerializer):
     members = AccountSerializer(many=True, read_only=True)
-    roles = SerializerMethodField()
+    roles = RoleSerializer(many=True, read_only=True)
 
     class Meta:
 
         model = Project
         fields = '__all__'
-
-    def get_roles(self, obj):
-        roles = obj.roles.all()
-        response = RoleSerializer(roles, many=True).data
-        return response
