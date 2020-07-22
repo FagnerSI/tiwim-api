@@ -29,6 +29,16 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
+AUTH_USER_MODEL = "account.Account"
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 # Application definition
 
@@ -46,12 +56,11 @@ INSTALLED_APPS = [
     'corsheaders',
 
     # local apps
-    'user',
     'role',
+    'account',
     'project',
     'topic',
     'replay',
-
 ]
 
 MIDDLEWARE = [
@@ -114,7 +123,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/

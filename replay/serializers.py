@@ -8,4 +8,12 @@ class ReplaySerializer(ModelSerializer):
 
         model = Replay
         fields = '__all__'
-        """ depth = 1 """
+
+
+class ReplaySerializerAll(ModelSerializer):
+
+    class Meta:
+
+        model = Replay
+        fields = '__all__'
+        depth = 1

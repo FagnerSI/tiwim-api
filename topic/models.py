@@ -1,6 +1,6 @@
 from django.db import models
 
-from user.models import User
+from account.models import Account
 from project.models import Project
 
 
@@ -13,7 +13,8 @@ class Topic(models.Model):
     description = models.TextField('Descrição', blank=True)
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
 
-    users = models.ManyToManyField(User)
+    members = models.ManyToManyField(
+        Account, verbose_name='Usuario', related_name='topics')
 
     project = models.ForeignKey(
         Project, verbose_name='Projeto', related_name='topics',  on_delete=models.CASCADE)
