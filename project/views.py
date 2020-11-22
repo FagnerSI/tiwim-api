@@ -35,7 +35,8 @@ class ProjectView(viewsets.ModelViewSet):
     def topics(self, request, pk):
         account = self.request.user
         project = Project.objects.get(id=pk)
-        queryset = project.topics.filter(members=account)
+        queryset = project.topics.filter(
+            members=account).order_by('-created_at')
 
         serializer = TopicSerializer(queryset, many=True)
         return Response(serializer.data)
