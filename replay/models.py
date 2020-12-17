@@ -5,6 +5,10 @@ from role.models import Role
 from topic.models import Topic
 
 
+def directory_path(instance, filename):
+    return 'replays/{0}'.format(filename)
+
+
 class Replay(models.Model):
 
     KIND_OF_SPEECH_CHOICES = (
@@ -51,7 +55,8 @@ class Replay(models.Model):
     roles_for = models.ManyToManyField(
         Role, verbose_name='Para o papel', related_name='replays_for')
 
-    url_details = models.TextField('uri', blank=True)
+    image_details = models.ImageField(
+        upload_to=directory_path, blank=True, null=True, max_length=255)
 
     created_at = models.DateTimeField('Criado em', auto_now_add=True)
 

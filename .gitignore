@@ -91,3 +91,6 @@ local_settings.py
 
 ## Database
 db.sqlite3
+
+## Images
+images/

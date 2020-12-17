@@ -17,5 +17,7 @@ class TopicView(viewsets.ModelViewSet):
         topic = Topic.objects.get(id=pk)
         queryset = topic.replays.all().order_by('created_at')
 
-        serializer = ReplaySerializerAll(queryset.reverse(), many=True)
+        serializer = ReplaySerializerAll(
+            queryset.reverse(), many=True, context={"request": request}
+        )
         return Response(serializer.data)
