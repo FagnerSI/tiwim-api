@@ -16,9 +16,7 @@ pycodestyle==2.5.0
 pylint==2.4.4
 python-decouple==3.3
 pytz==2019.1
-six==1.14.0
-sqlparse==0.3.0
-static3==0.7.0
-typed-ast==1.4.1
-whitenoise==4.1.4
-wrapt==1.11.2
+pyxdg==0.25
+SecretStorage==2.3.1
+six==1.11.0
+virtualenv==16.4.3
