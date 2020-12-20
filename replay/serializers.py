@@ -4,7 +4,7 @@ from .models import Replay
 
 
 class ReplaySerializer(ModelSerializer):
-    image_details = Base64ImageField()
+    image_details = Base64ImageField(required=False)
     class Meta:
 
         model = Replay
