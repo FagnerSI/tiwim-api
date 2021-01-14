@@ -22,11 +22,3 @@ class ReplayView(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
 
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-
-    @action(detail=False, methods=['get'])
-    def last_replay_of_user(self, request):
-        account = self.request.user
-        queryset = Replay.objects.filter(
-            author=account).order_by('-created_at')[:1]
-        serializer = ReplaySerializer(queryset, many=True)
-        return Response(serializer.data)
