@@ -20,6 +20,7 @@ class TopicView(viewsets.ModelViewSet):
         serializer = ReplaySerializerAll(
             queryset.reverse(), many=True, context={"request": request}
         )
+
         return Response(serializer.data)
 
     @action(detail=True, methods=['get'])
@@ -28,7 +29,30 @@ class TopicView(viewsets.ModelViewSet):
         topic = Topic.objects.get(id=pk)
 
         queryset = topic.replays.filter(
-            author=account).order_by('-created_at')[:1]
+            author=account).last()
 
-        serializer = ReplaySerializer(queryset, many=True)
+        serializer = ReplaySerializer(queryset)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['get'])
+    def filter_replays(self, request, pk):
+        kind_speech = request.query_params.get('kind_speech', None)
+        roles_in = request.query_params.get('roles_in', None)
+        roles_for = request.query_params.get('roles_for', None)
+
+        topic = Topic.objects.get(id=pk)
+        queryset = topic.replays.all()
+
+        if kind_speech:
+            queryset = queryset.filter(kind_speech=kind_speech)
+
+        if roles_in:
+            queryset = queryset.filter(roles_in=roles_in)
+
+        if roles_for:
+            queryset = queryset.filter(roles_for=roles_for)
+
+        serializer = ReplaySerializerAll(
+            queryset.reverse(), many=True, context={"request": request}
+        )
         return Response(serializer.data)
